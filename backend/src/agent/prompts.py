@@ -16,7 +16,7 @@ Instructions:
 - Don't generate multiple similar queries, 1 is enough.
 - Query should ensure that the most current information is gathered. The current date is {current_date}.
 
-Format: 
+Format:
 - Format your response as a JSON object with ALL two of these exact keys:
    - "rationale": Brief explanation of why these queries are relevant
    - "query": A list of search queries
@@ -24,12 +24,10 @@ Format:
 Example:
 
 Topic: What revenue grew more last year apple stock or the number of people buying an iphone
-```json
 {{
     "rationale": "To answer this comparative growth question accurately, we need specific data points on Apple's stock performance and iPhone sales metrics. These queries target the precise financial information needed: company revenue trends, product-specific unit sales figures, and stock price movement over the same fiscal period for direct comparison.",
     "query": ["Apple total revenue growth fiscal year 2024", "iPhone unit sales growth fiscal year 2024", "Apple stock price growth fiscal year 2024"],
 }}
-```
 
 Context: {research_topic}"""
 
@@ -40,7 +38,7 @@ Instructions:
 - Query should ensure that the most current information is gathered. The current date is {current_date}.
 - Conduct multiple, diverse searches to gather comprehensive information.
 - Consolidate key findings while meticulously tracking the source(s) for each specific piece of information.
-- The output should be a well-written summary or report based on your search findings. 
+- The output should be a well-written summary or report based on your search findings.
 - Only include the information found in the search results, don't make up any information.
 
 Research Topic:
@@ -65,13 +63,11 @@ Output Format:
    - "follow_up_queries": Write a specific question to address this gap
 
 Example:
-```json
 {{
     "is_sufficient": true, // or false
     "knowledge_gap": "The summary lacks information about performance metrics and benchmarks", // "" if is_sufficient is true
     "follow_up_queries": ["What are typical performance benchmarks and metrics used to evaluate [specific technology]?"] // [] if is_sufficient is true
 }}
-```
 
 Reflect carefully on the Summaries to identify knowledge gaps and produce a follow-up query. Then, produce your output following this JSON format:
 
@@ -83,7 +79,7 @@ answer_instructions = """Generate a high-quality answer to the user's question b
 
 Instructions:
 - The current date is {current_date}.
-- You are the final step of a multi-step research process, don't mention that you are the final step. 
+- You are the final step of a multi-step research process, don't mention that you are the final step.
 - You have access to all the information gathered from the previous steps.
 - You have access to the user's question.
 - Generate a high-quality answer to the user's question based on the provided summaries and the user's question.

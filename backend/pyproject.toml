@@ -15,9 +15,10 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "langgraph-sdk>=0.1.57",
     "langgraph-cli",
-    "langgraph-api",
+    "langgraph-api>=0.5.23",
     "fastapi",
     "google-genai",
+    "langchain-openai>=0.3.35",
 ]
 
 
