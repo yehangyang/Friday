@@ -24,7 +24,6 @@ from agent.prompts import (
     reflection_instructions,
     answer_instructions,
 )
-from langchain_google_genai import ChatGoogleGenerativeAI
 from agent.utils import (
     get_citations,
     get_research_topic,
@@ -34,11 +33,11 @@ from agent.utils import (
 
 load_dotenv()
 
-if os.getenv("GEMINI_API_KEY") is None:
-    raise ValueError("GEMINI_API_KEY is not set")
+if os.getenv("API_KEY") is None:
+    raise ValueError("API_KEY is not set")
 
 # Used for Google Search API
-genai_client = Client(api_key=os.getenv("GEMINI_API_KEY"))
+genai_client = Client(api_key=os.getenv("API_KEY"))
 
 
 # Nodes
@@ -65,7 +64,7 @@ def generate_query(state: OverallState, config: RunnableConfig) -> QueryGenerati
     llm = ChatOpenAI(
         model=configurable.query_generator_model,
         base_url=os.getenv("BASE_URL"),
-        api_key=os.getenv("GEMINI_API_KEY"),  # TODO: 更新名字
+        api_key=os.getenv("API_KEY"),
         temperature=1.0,
         max_completion_tokens=8192,  # TODO: 可配置化
     )
@@ -119,7 +118,7 @@ def web_research(state: WebSearchState, config: RunnableConfig) -> OverallState:
     llm = ChatOpenAI(
         model=configurable.query_generator_model,
         base_url=os.getenv("BASE_URL"),
-        api_key=os.getenv("GEMINI_API_KEY"),  # TODO: 更新名字
+        api_key=os.getenv("API_KEY"),
         temperature=0,
         max_completion_tokens=8192,  # TODO: 可配置化
     )
@@ -175,7 +174,7 @@ def reflection(state: OverallState, config: RunnableConfig) -> ReflectionState:
     llm = ChatOpenAI(
         model=reasoning_model,
         base_url=os.getenv("BASE_URL"),
-        api_key=os.getenv("GEMINI_API_KEY"),  # TODO: 更新名字
+        api_key=os.getenv("API_KEY"),
         temperature=1.0,
         max_completion_tokens=8192,  # TODO: 可配置化
     )
@@ -257,7 +256,7 @@ def finalize_answer(state: OverallState, config: RunnableConfig):
     llm = ChatOpenAI(
         model=reasoning_model,
         base_url=os.getenv("BASE_URL"),
-        api_key=os.getenv("GEMINI_API_KEY"),  # TODO: 更新名字
+        api_key=os.getenv("API_KEY"),
         temperature=0,
         max_completion_tokens=8192,  # TODO: 可配置化
     )
